@@ -4,12 +4,12 @@ from authentication.serializers import UserViewSerializer
 
 class BookingSerializer(serializers.ModelSerializer):
     user = UserViewSerializer(read_only=True)
-    mechanic = UserViewSerializer(read_only=True)
+    mechanic = UserViewSerializer()
 
     class Meta:
         model = Booking
         fields = '__all__'
-        read_only_fields = ('id', 'created_at','status')
+        read_only_fields = ('id', 'created_at')
 
     def create(self, validated_data):
         user = self.context['request'].user

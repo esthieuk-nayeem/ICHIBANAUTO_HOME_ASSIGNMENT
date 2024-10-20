@@ -37,6 +37,20 @@ class RegisterAdminView(generics.GenericAPIView):
         user_data = serializer.data
 
         return Response(user_data, status=status.HTTP_201_CREATED)
+    
+
+class RegisterMechanicView(generics.GenericAPIView):
+    serializer_class = RegisterMechanicSerializer
+
+    def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        user_instance = serializer.save()
+
+        user_data = serializer.data
+
+        return Response(user_data, status=status.HTTP_201_CREATED)   
 
 
 

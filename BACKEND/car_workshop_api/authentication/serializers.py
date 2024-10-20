@@ -24,11 +24,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        student_group, created = Group.objects.get_or_create(name='user')
+        user_group, created = Group.objects.get_or_create(name='user')
         user = User.objects.create_user(**validated_data)
         user.save()
 
-        user.groups.add(student_group)
+        user.groups.add(user_group)
 
         return user
 
@@ -43,7 +43,7 @@ class RegisterAdminSerializer(serializers.ModelSerializer):
         fields = ['full_name', "phone", "email", "password"]
 
     def validate(self, attrs):
-        email = attrs.get('phone', '')
+        email = attrs.get('email', '')
         phone = attrs.get('phone', '')
 
         # if not phone.isalnum():
@@ -57,6 +57,33 @@ class RegisterAdminSerializer(serializers.ModelSerializer):
         user.save()
 
         user.groups.add(admin_group)
+
+        return user
+
+
+
+class RegisterMechanicSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(max_length=68, min_length=6, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['full_name', "phone", "email", "password"]
+
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        phone = attrs.get('phone', '')
+
+        # if not phone.isalnum():
+        #     raise serializers.ValidationError("The phone should only conatain alphanumeric characters!")
+
+        return attrs
+
+    def create(self, validated_data):
+        mechanic_group, created = Group.objects.get_or_create(name='mechanic')
+        user = User.objects.create_user(**validated_data)
+        user.save()
+
+        user.groups.add(mechanic_group)
 
         return user
 
