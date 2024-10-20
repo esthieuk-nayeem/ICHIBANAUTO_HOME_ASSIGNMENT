@@ -16,7 +16,7 @@ from authentication.serializers import UserViewSerializer
 
 class BookingAPIView(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsAdminPermission, IsMechanicPermission]
+    permission_classes = [permissions.IsAuthenticated, IsAdminPermission]
 
     def get(self, request, pk=None):
         if pk:
@@ -101,7 +101,7 @@ class AddMechanicToBooking(APIView):
         try:
             user = User.objects.get(id=user_id)
             booking = Booking.objects.get(id=booking_id)
-            booking.mechanic.add(user)
+            booking.mechanic = user
             booking.save()
             return Response({"message": f"Mechanic with id {user_id} added to booking {booking_id}"}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
@@ -123,9 +123,12 @@ class RemoveMechanicFromBooking(APIView):
         try:
             user = User.objects.get(id=user_id)
             booking = Booking.objects.get(id=booking_id)
-            booking.mechanic.remove(user)
-            booking.save()
-            return Response({"message": f"Mechanic with id {user_id} removed from booking {booking_id}"}, status=status.HTTP_200_OK)
+            if booking.mechanic == user:
+                booking.mechanic = None
+                booking.save()
+                return Response({"message": f"Mechanic with id {user_id} removed from booking {booking_id}"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": f"Mechanic with id {user_id} is not assigned to booking {booking_id}"}, status=status.HTTP_404_NOT_FOUND)
         except User.DoesNotExist:
             return Response({"error": f"Mechanic with id {user_id} does not exist"}, status=status.HTTP_404_NOT_FOUND)
         except Booking.DoesNotExist:
