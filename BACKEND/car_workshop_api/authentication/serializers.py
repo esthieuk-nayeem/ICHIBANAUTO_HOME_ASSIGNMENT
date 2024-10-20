@@ -124,7 +124,7 @@ class LoginSerializer(serializers.ModelSerializer):
 class UserViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ["id", "phone", "email", "is_active", 'full_name','dob','gender','occupation']
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
