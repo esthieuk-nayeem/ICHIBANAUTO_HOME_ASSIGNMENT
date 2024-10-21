@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Brainiac Lab',
+      title: 'Ichiban Auto',
+      themeMode: ThemeMode.system,
       theme: getApplicationTheme(context),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

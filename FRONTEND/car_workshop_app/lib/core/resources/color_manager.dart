@@ -5,7 +5,7 @@ class ColorManager {
     brightness: Brightness.light,
     primary: Color(0xff000000), // Black
     onPrimary: Color(0xffffffff), // White
-    primaryContainer: Color(0xff424242), // Dark grey
+    primaryContainer: Color(0xffffffff), // Dark grey
     onPrimaryContainer: Color(0xffffffff), // White
     secondary: Color(0xffb0bec5), // Silver
     onSecondary: Color(0xff000000), // Black
@@ -55,7 +55,7 @@ class ColorManager {
     onErrorContainer: Color(0xff000000), // Black
     background: Color(0xffffffff), // White
     onBackground: Color(0xff000000), // Black
-    surface: Color(0xffffffff), // White
+    surface: Color(0xffb0bec5), // White
     onSurface: Color(0xff000000), // Black
     surfaceVariant: Color(0xfff5f5f5), // Light grey
     onSurfaceVariant: Color(0xff000000), // Black
