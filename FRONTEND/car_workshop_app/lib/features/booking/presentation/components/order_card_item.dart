@@ -1,4 +1,6 @@
+import 'package:car_workshop_app/features/booking/presentation/components/status_card.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OrderListCard extends StatelessWidget {
   final String carName;
@@ -6,6 +8,7 @@ class OrderListCard extends StatelessWidget {
   final String carRegistrationPlate;
   final String status;
   final String mechanicName;
+  final VoidCallback onTap;
 
   const OrderListCard({
     Key? key,
@@ -14,78 +17,90 @@ class OrderListCard extends StatelessWidget {
     required this.carRegistrationPlate,
     required this.status,
     required this.mechanicName,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.dry_cleaning,
-              size: 40,
-              color: Colors.blue[700],
-            ),
-            SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    carName,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[700],
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    '$orderDate, $carRegistrationPlate',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          status,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        mechanicName,
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+    final width = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 3,
+        child: Container(
+          height: 91,
+          width: width - 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 8,
               ),
-            ),
-          ],
+              Container(
+                width: (width - 50) * .4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      carName,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        color: const Color(0xFF4157FF),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      orderDate,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 10,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      carRegistrationPlate,
+                      style: GoogleFonts.poppins(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Container(
+                width: (width - 50) * .4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      mechanicName,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    StatusCard(text: status),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+            ],
+          ),
         ),
       ),
     );

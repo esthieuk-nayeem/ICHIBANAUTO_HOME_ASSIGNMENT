@@ -3,6 +3,7 @@ import 'package:car_workshop_app/features/booking/models/booking_data_model.dart
 import 'package:car_workshop_app/features/booking/presentation/components/bottom_nav_bar.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/order_card_item.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/admin_dashboard.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/booking_details_page.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -42,6 +43,9 @@ class _BookingListPageState extends State<BookingListPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: OrderListCard(
+                        onTap: () {
+                          Get.to(BookingDetailsPage());
+                        },
                         carName: widget.orders[index].carMake.toString(),
                         orderDate:
                             widget.orders[index].appointmentDate.toString(),
