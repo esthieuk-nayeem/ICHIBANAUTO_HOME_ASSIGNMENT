@@ -4,7 +4,7 @@ from authentication.serializers import UserViewSerializer
 
 class BookingSerializer(serializers.ModelSerializer):
     user = UserViewSerializer(read_only=True)
-    mechanic = UserViewSerializer()
+    mechanic = UserViewSerializer(read_only=True)
 
     class Meta:
         model = Booking

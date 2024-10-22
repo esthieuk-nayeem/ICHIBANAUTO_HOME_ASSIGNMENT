@@ -1,8 +1,11 @@
+import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:car_workshop_app/features/booking/models/booking_data_model.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/bottom_nav_bar.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/quick_menu_item.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/quick_menu_section.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/mechanic_dashboard.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/order_list_page.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +18,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    BookingController controller = Get.put(BookingController());
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -37,29 +41,29 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentIndex,
-        onItemSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          switch (index) {
-            case 0:
-              Get.offAll(AdminDashboardPage());
-              break;
-            case 1:
-              Get.offAll(BookingListPage(
-                orders: [BookingDataModel()],
-              ));
-              break;
-            case 2:
-              // Add routing logic for index 2
-              break;
-            case 3:
-              // Add routing logic for index 3
-              break;
-          }
-        },
+      bottomNavigationBar: Obx(
+        () => BottomNavBar(
+          currentIndex: controller.currentMenuIndex.value,
+          onItemSelected: (index) async {
+            controller.currentMenuIndex.value = index;
+
+            switch (index) {
+              case 0:
+                Get.offAll(AdminDashboardPage());
+                break;
+              case 1:
+                await controller.getBookings(context);
+                break;
+              case 2:
+                await controller.getBookings(context);
+                break;
+              case 3:
+                Get.to(ProfilePage());
+                // Add routing logic for index 3
+                break;
+            }
+          },
+        ),
       ),
     );
   }
