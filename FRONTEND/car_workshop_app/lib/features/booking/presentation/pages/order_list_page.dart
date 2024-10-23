@@ -44,7 +44,9 @@ class _BookingListPageState extends State<BookingListPage> {
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: OrderListCard(
                         onTap: () {
-                          Get.to(BookingDetailsPage());
+                          Get.to(BookingDetailsPage(
+                            bookingData: widget.orders[index],
+                          ));
                         },
                         carName: widget.orders[index].carMake.toString(),
                         orderDate:
