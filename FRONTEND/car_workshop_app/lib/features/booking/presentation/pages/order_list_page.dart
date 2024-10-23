@@ -32,7 +32,7 @@ class _BookingListPageState extends State<BookingListPage> {
         child: AnimationLimiter(
           child: ListView.builder(
             padding: EdgeInsets.all(16),
-            itemCount: widget.orders.length,
+            itemCount: controller.allBookings.length,
             itemBuilder: (BuildContext context, int index) {
               return AnimationConfiguration.staggeredList(
                 position: index,
@@ -45,17 +45,20 @@ class _BookingListPageState extends State<BookingListPage> {
                       child: OrderListCard(
                         onTap: () {
                           Get.to(BookingDetailsPage(
+                            index: index,
                             bookingData: widget.orders[index],
                           ));
                         },
-                        carName: widget.orders[index].carMake.toString(),
-                        orderDate:
-                            widget.orders[index].appointmentDate.toString(),
-                        carRegistrationPlate: widget
-                            .orders[index].carRegistrationPlate
+                        carName:
+                            controller.allBookings[index].carMake.toString(),
+                        orderDate: controller.allBookings[index].appointmentDate
                             .toString(),
-                        status: widget.orders[index].status.toString(),
-                        mechanicName: widget.orders[index].mechanic?.fullName
+                        carRegistrationPlate: controller
+                            .allBookings[index].carRegistrationPlate
+                            .toString(),
+                        status: controller.allBookings[index].status.toString(),
+                        mechanicName: controller
+                                .allBookings[index].mechanic?.fullName
                                 .toString() ??
                             '',
                       ),
@@ -78,10 +81,10 @@ class _BookingListPageState extends State<BookingListPage> {
                 Get.offAll(AdminDashboardPage());
                 break;
               case 1:
-                await controller.getBookings(context);
+                await controller.getBookings(context, true);
                 break;
               case 2:
-                await controller.getBookings(context);
+                await controller.getBookings(context, true);
                 break;
               case 3:
                 Get.to(ProfilePage());

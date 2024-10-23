@@ -97,10 +97,10 @@ class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
                 Get.offAll(AdminDashboardPage());
                 break;
               case 1:
-                await controller.getBookings(context);
+                await controller.getBookings(context, true);
                 break;
               case 2:
-                await controller.getBookings(context);
+                await controller.getBookings(context, true);
                 break;
               case 3:
                 Get.to(ProfilePage());

@@ -3,23 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UserDetailsCard extends StatefulWidget {
-  final VoidCallback onUpdateMechanic;
+class CustomerDetailsCard extends StatefulWidget {
+  final String customerName;
+  final String email;
+  final String phone;
+  final VoidCallback onUpdateCustomer;
   final String label;
   final int index;
 
-  const UserDetailsCard({
+  const CustomerDetailsCard({
     Key? key,
-    required this.onUpdateMechanic,
+    required this.customerName,
+    required this.email,
+    required this.phone,
+    required this.onUpdateCustomer,
     required this.label,
     required this.index,
   }) : super(key: key);
 
   @override
-  _UserDetailsCardState createState() => _UserDetailsCardState();
+  _CustomerDetailsCardState createState() => _CustomerDetailsCardState();
 }
 
-class _UserDetailsCardState extends State<UserDetailsCard> {
+class _CustomerDetailsCardState extends State<CustomerDetailsCard> {
   @override
   Widget build(BuildContext context) {
     final BookingController controller = Get.put(BookingController());
@@ -34,10 +40,10 @@ class _UserDetailsCardState extends State<UserDetailsCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Mechanic Header Section
+            // Customer Header Section
             Row(
               children: [
-                Icon(Icons.engineering, color: Color(0xFF4157FF)),
+                Icon(Icons.person, color: Color(0xFF4157FF)),
                 const SizedBox(width: 10),
                 Text(
                   widget.label,
@@ -48,41 +54,20 @@ class _UserDetailsCardState extends State<UserDetailsCard> {
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  onPressed: widget.onUpdateMechanic,
-                  icon: Icon(
-                    Icons.edit,
-                    color: Color(0xFF4157FF),
-                    size: 20,
-                  ),
-                  style: IconButton.styleFrom(
-                    backgroundColor: Color(0xFF4157FF).withOpacity(0.1),
-                    padding: EdgeInsets.all(8),
-                  ),
-                ),
               ],
             ),
             const SizedBox(height: 16),
 
-            // Mechanic Name
-            _buildInfoRow(
-                "Name",
-                controller.allBookings[widget.index].mechanic!.fullName
-                    .toString()),
+            // Customer Name
+            _buildInfoRow("Name", widget.customerName),
             const SizedBox(height: 12),
 
             // Email
-            _buildInfoRow(
-                "Email",
-                controller.allBookings[widget.index].mechanic!.email
-                    .toString()),
+            _buildInfoRow("Email", widget.email),
             const SizedBox(height: 12),
 
             // Phone
-            _buildInfoRow(
-                "Phone",
-                controller.allBookings[widget.index].mechanic!.phone
-                    .toString()),
+            _buildInfoRow("Phone", widget.phone),
           ],
         ),
       ),

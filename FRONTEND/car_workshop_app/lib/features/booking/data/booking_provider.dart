@@ -27,14 +27,78 @@ class BookingProvider {
         print(responseData);
         return {"data": responseData, "status": response.statusCode};
       } else {
-        print('Failed to register!!: ${response.statusCode}');
+        print('Failed to get data!!: ${response.statusCode}');
         print(responseData);
         return {"data": responseData, "status": response.statusCode};
         ;
       }
     } catch (error) {
       print("Error: $error");
-      throw Exception('Error registering !: $error');
+      throw Exception('Error getting data !: $error');
+    }
+  }
+
+  Future<dynamic> getMechanicData(String query) async {
+    try {
+      final token = storage.token.val;
+      print(token);
+
+      final headers = {
+        "Authorization": "token 38d1a7012c63629151afffaf9e4ea83c3600e1ef",
+      };
+      final response = await http.get(
+        Uri.parse(ApiPath.BASE_URL + "search/?search=" + query),
+        headers: headers,
+      );
+
+      final responseData = jsonDecode(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      } else {
+        print('Failed to Get Mechanic data!!: ${response.statusCode}');
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+        ;
+      }
+    } catch (error) {
+      print("Error: $error");
+      throw Exception('Error Geting Mechanic data !: $error');
+    }
+  }
+
+  Future<dynamic> assignMechanic(String mechanicID, String bookingID) async {
+    try {
+      final token = storage.token.val;
+      print(token);
+
+      final body = {"id": mechanicID, "booking_id": bookingID};
+
+      final headers = {
+        "Authorization": "token 38d1a7012c63629151afffaf9e4ea83c3600e1ef",
+      };
+      final response = await http.patch(
+          Uri.parse(ApiPath.BASE_URL + "assignmechanic/"),
+          headers: headers,
+          body: body);
+
+      final responseData = jsonDecode(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      } else {
+        print('Failed to Get Mechanic data!!: ${response.statusCode}');
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+        ;
+      }
+    } catch (error) {
+      print("Error: $error");
+      throw Exception('Error Geting Mechanic data !: $error');
     }
   }
 }

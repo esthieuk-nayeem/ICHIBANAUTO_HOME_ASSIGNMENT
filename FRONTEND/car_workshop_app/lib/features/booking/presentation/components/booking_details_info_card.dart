@@ -54,6 +54,21 @@ class BookingDetailsCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                Text(
+                  "Status",
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF4157FF),
+                  ),
+                ),
+                const Spacer(),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -71,7 +86,8 @@ class BookingDetailsCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 12),
 
             // Car Registration
             _buildInfoRow("Registration", carRegistrationPlate),
