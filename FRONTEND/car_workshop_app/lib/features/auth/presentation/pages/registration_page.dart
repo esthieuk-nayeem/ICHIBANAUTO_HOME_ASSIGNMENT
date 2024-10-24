@@ -13,26 +13,28 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     AuthController controller = Get.put(AuthController());
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Container(
             height: height,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [AppPallete.gradient2, AppPallete.gradient1])),
+            // decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //         colors: [AppPallete.gradient2, AppPallete.gradient1])),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   SizedBox(height: height * .08),
-                  const Text(
+                  Text(
                     AppStrings.register,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w300,
                       fontSize: 50,
                     ),
@@ -71,7 +73,7 @@ class RegistrationScreen extends StatelessWidget {
                       Text(
                         AppStrings.alreadyRegistered,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.w300,
                           fontSize: 16,
                         ),

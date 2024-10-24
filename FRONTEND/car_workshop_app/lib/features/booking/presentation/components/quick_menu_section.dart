@@ -65,8 +65,8 @@ class _QuickMenuSectionState extends State<QuickMenuSection>
         FadeTransition(
           opacity: _fadeAnimations[1],
           child: QuickMenuItem(
-            title: 'Pending Bookings',
-            icon: Icons.hourglass_empty,
+            title: 'All Customers',
+            icon: Icons.people_outline,
             onTap: () {},
           ),
         ),
@@ -74,8 +74,8 @@ class _QuickMenuSectionState extends State<QuickMenuSection>
         FadeTransition(
           opacity: _fadeAnimations[2],
           child: QuickMenuItem(
-            title: 'Completed Bookings',
-            icon: Icons.check_circle_outline,
+            title: 'All Mechanics',
+            icon: Icons.build,
             onTap: () {},
           ),
         ),

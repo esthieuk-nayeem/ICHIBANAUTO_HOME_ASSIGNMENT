@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:car_workshop_app/core/constants/api_path.dart';
 import 'package:car_workshop_app/core/utils/services/local_storage_service.dart';
+import 'package:car_workshop_app/features/booking/models/booking_post_model.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
   static AppStorage storage = AppStorage();
+  final token = storage.token.val;
   // Get all service List
 
   Future<dynamic> getBookingData() async {
@@ -13,7 +15,7 @@ class BookingProvider {
       print(token);
 
       final headers = {
-        "Authorization": "token 38d1a7012c63629151afffaf9e4ea83c3600e1ef",
+        "Authorization": "token $token",
       };
       final response = await http.get(
         Uri.parse(ApiPath.BASE_URL + "bookings/"),
@@ -44,7 +46,7 @@ class BookingProvider {
       print(token);
 
       final headers = {
-        "Authorization": "token 38d1a7012c63629151afffaf9e4ea83c3600e1ef",
+        "Authorization": "token $token",
       };
       final response = await http.get(
         Uri.parse(ApiPath.BASE_URL + "search/?search=" + query),
@@ -77,7 +79,7 @@ class BookingProvider {
       final body = {"id": mechanicID, "booking_id": bookingID};
 
       final headers = {
-        "Authorization": "token 38d1a7012c63629151afffaf9e4ea83c3600e1ef",
+        "Authorization": "token $token",
       };
       final response = await http.patch(
           Uri.parse(ApiPath.BASE_URL + "assignmechanic/"),
@@ -99,6 +101,73 @@ class BookingProvider {
     } catch (error) {
       print("Error: $error");
       throw Exception('Error Geting Mechanic data !: $error');
+    }
+  }
+
+  Future<dynamic> changeStatus(String status, String bookingID) async {
+    try {
+      final token = storage.token.val;
+      print(token);
+
+      final body = {"status": status};
+
+      final headers = {
+        "Authorization": "token $token",
+      };
+      final response = await http.patch(
+          Uri.parse(ApiPath.BASE_URL + "bookings/" + bookingID + "/"),
+          headers: headers,
+          body: body);
+
+      final responseData = jsonDecode(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      } else {
+        print('Failed to Update data!!: ${response.statusCode}');
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+        ;
+      }
+    } catch (error) {
+      print("Error: $error");
+      throw Exception('Error Update data !: $error');
+    }
+  }
+
+  Future<dynamic> postBooking(BookingPostModel booking) async {
+    try {
+      final token = storage.token.val;
+      print(token);
+
+      final body = booking.toJson();
+      print(body);
+
+      final headers = {
+        "Authorization": "token $token",
+        "Content-Type": "application/json"
+      };
+      final response = await http.post(
+          Uri.parse(ApiPath.BASE_URL + "bookings/"),
+          headers: headers,
+          body: jsonEncode(body));
+
+      final responseData = jsonDecode(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 201) {
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      } else {
+        print('Failed to post data!!: ${response.statusCode}');
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      }
+    } catch (error) {
+      print("Error: $error");
+      throw Exception('Error posting data !: $error');
     }
   }
 }

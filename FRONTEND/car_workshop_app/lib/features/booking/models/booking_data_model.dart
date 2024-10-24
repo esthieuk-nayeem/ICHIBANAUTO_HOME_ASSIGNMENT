@@ -71,13 +71,13 @@ class BookingDataModel {
 
 class User {
   int? id;
-  Null? phone;
+  String? phone;
   String? email;
   bool? isActive;
-  Null? fullName;
-  Null? dob;
-  Null? gender;
-  Null? occupation;
+  String? fullName;
+  String? dob;
+  String? gender;
+  String? occupation;
 
   User(
       {this.id,
@@ -120,9 +120,9 @@ class Mechanic {
   String? email;
   bool? isActive;
   String? fullName;
-  Null? dob;
-  Null? gender;
-  Null? occupation;
+  String? dob;
+  String? gender;
+  String? occupation;
 
   Mechanic(
       {this.id,

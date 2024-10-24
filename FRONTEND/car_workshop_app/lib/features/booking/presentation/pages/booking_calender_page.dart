@@ -1,7 +1,10 @@
+import 'package:car_workshop_app/core/utils/services/local_storage_service.dart';
 import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/bottom_nav_bar.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/admin_dashboard.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/mechanic_dashboard.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/profile_page.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:car_workshop_app/features/booking/models/booking_data_model.dart';
 import 'package:get/get.dart';
@@ -24,6 +27,7 @@ class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
   DateTime? _selectedDay;
   late Map<DateTime, List<BookingDataModel>> _bookingMap;
   BookingController controller = Get.put(BookingController());
+  AppStorage appStorage = AppStorage();
 
   @override
   void initState() {
@@ -94,7 +98,13 @@ class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
 
             switch (index) {
               case 0:
-                Get.offAll(AdminDashboardPage());
+                if (appStorage.userGroup.val == "admin") {
+                  Get.offAll(AdminDashboardPage());
+                } else if (appStorage.userGroup.val == "mechanic") {
+                  Get.offAll(MechanicDashboardPage());
+                } else if (appStorage.userGroup.val == "user") {
+                  Get.offAll(UserDashboardPage());
+                }
                 break;
               case 1:
                 await controller.getBookings(context, true);
@@ -112,8 +122,30 @@ class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0, // No shadow for a flat, minimal look
         centerTitle: true,
-        title: const Text('Booking Calendar'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Calendar',
+              style: TextStyle(
+                color: Colors.black87, // Softer black for text
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2, // Adds a modern feel
+              ),
+            ),
+            SizedBox(width: 8),
+            Icon(
+              Icons
+                  .calendar_month_outlined, // Adding a simple icon can add a modern touch
+              color: Colors.black87,
+              size: 24,
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [

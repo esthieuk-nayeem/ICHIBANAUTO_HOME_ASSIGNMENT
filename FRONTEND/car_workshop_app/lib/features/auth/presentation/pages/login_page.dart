@@ -16,14 +16,15 @@ class LoginScreen extends StatelessWidget {
     AuthController controller = Get.put(AuthController());
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Container(
             height: height,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [AppPallete.gradient2, AppPallete.gradient1])),
+            // decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //         colors: [AppPallete.gradient2, AppPallete.gradient1])),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                       const Text(
                         AppStrings.companyName,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.w300,
                           fontSize: 50,
                         ),
@@ -68,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                   const Text(
                     'or',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 18,
                     ),
                   ),

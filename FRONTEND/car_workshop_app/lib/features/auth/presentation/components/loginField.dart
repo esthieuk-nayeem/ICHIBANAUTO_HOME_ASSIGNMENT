@@ -1,4 +1,3 @@
-import 'package:car_workshop_app/core/resources/color_pallete.dart';
 import 'package:flutter/material.dart';
 
 class LoginField extends StatelessWidget {
@@ -12,6 +11,7 @@ class LoginField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 400,
@@ -22,21 +22,20 @@ class LoginField extends StatelessWidget {
             contentPadding: const EdgeInsets.all(27),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                color: AppPallete.borderColor,
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: AppPallete.gradient2,
+              borderSide: BorderSide(
+                color: Colors.black.withOpacity(0.4),
                 width: 3,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
             hintText: hintText,
             hintStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w200)),
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w200)),
       ),
     );
   }

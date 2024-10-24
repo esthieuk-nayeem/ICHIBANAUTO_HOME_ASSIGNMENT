@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ichiban Auto',
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       theme: getApplicationTheme(context),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

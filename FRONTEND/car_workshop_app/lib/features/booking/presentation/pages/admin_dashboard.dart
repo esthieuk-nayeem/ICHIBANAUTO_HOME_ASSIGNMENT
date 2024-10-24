@@ -15,7 +15,6 @@ class AdminDashboardPage extends StatefulWidget {
 }
 
 class _AdminDashboardPageState extends State<AdminDashboardPage> {
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     BookingController controller = Get.put(BookingController());

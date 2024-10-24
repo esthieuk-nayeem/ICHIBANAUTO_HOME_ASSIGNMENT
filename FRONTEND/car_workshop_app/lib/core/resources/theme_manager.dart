@@ -9,7 +9,7 @@ ThemeData getApplicationTheme(BuildContext context) {
       MediaQuery.of(context).platformBrightness == Brightness.dark;
 
   ThemeData baseTheme = isDarkMode
-      ? ThemeData.from(colorScheme: ColorManager.flexSchemeDark)
+      ? ThemeData.from(colorScheme: ColorManager.flexSchemeLight)
       : ThemeData.from(colorScheme: ColorManager.flexSchemeLight);
 
   TextTheme textTheme = TextTheme(
@@ -46,7 +46,7 @@ ThemeData getApplicationTheme(BuildContext context) {
       borderSide: BorderSide(color: baseTheme.colorScheme.onSurfaceVariant),
     ),
     focusedBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: baseTheme.colorScheme.primary),
+      borderSide: BorderSide(color: baseTheme.colorScheme.background),
     ),
     errorBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: baseTheme.colorScheme.error),

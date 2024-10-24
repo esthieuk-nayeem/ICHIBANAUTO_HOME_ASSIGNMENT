@@ -16,7 +16,7 @@ from authentication.serializers import UserViewSerializer
 
 class BookingAPIView(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsAdminPermission]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk=None):
         if pk:

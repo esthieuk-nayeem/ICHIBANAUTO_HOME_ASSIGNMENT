@@ -1,6 +1,10 @@
+import 'package:car_workshop_app/core/utils/services/local_storage_service.dart';
+import 'package:car_workshop_app/features/auth/presentation/pages/login_page.dart';
 import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/bottom_nav_bar.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/admin_dashboard.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/mechanic_dashboard.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppStorage appStorage = AppStorage();
     BookingController controller = Get.put(BookingController());
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -19,7 +24,13 @@ class ProfilePage extends StatelessWidget {
 
             switch (index) {
               case 0:
-                Get.offAll(AdminDashboardPage());
+                if (appStorage.userGroup.val == "admin") {
+                  Get.offAll(AdminDashboardPage());
+                } else if (appStorage.userGroup.val == "mechanic") {
+                  Get.offAll(MechanicDashboardPage());
+                } else if (appStorage.userGroup.val == "user") {
+                  Get.offAll(UserDashboardPage());
+                }
                 break;
               case 1:
                 await controller.getBookings(context, true);
@@ -39,15 +50,28 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        elevation: 0,
+        elevation: 0, // No shadow for a flat, minimal look
         centerTitle: true,
-        title: const Text(
-          'Profile',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Profile',
+              style: TextStyle(
+                color: Colors.black87, // Softer black for text
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2, // Adds a modern feel
+              ),
+            ),
+            SizedBox(width: 8),
+            Icon(
+              Icons
+                  .person_outline, // Adding a simple icon can add a modern touch
+              color: Colors.black87,
+              size: 24,
+            ),
+          ],
         ),
       ),
       body: SafeArea(
@@ -74,16 +98,16 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'John Doe',
+                  Text(
+                    appStorage.userFullName.val,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'john.doe@example.com',
+                  Text(
+                    appStorage.userEmail.val,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -151,6 +175,13 @@ class ProfilePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Add logout logic here
+
+                  appStorage.instance.remove('token');
+                  appStorage.instance.remove('userFullName');
+                  appStorage.instance.remove('userEmail');
+                  appStorage.instance.remove('userGroup');
+
+                  Get.offAll(LoginScreen());
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red[400],

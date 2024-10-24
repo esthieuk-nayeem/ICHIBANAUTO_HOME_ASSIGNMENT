@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:car_workshop_app/core/common/widgets/loading_indicator.dart';
 import 'package:car_workshop_app/core/utils/services/local_storage_service.dart';
 import 'package:car_workshop_app/features/auth/data/auth_provider.dart';
 import 'package:car_workshop_app/features/auth/models/loggedUserModel.dart';
@@ -34,11 +35,19 @@ class AuthController extends GetxController {
   }
 
   Future<void> login(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const MinimalLoadingIndicator();
+      },
+    );
     try {
       final response = await authProvider.login(
           loginEmailController.text, loginPasswordController.text);
 
       if (response['status'] != 200) {
+        Get.back();
         final errorMessage = response['data'];
         final snackBar = SnackBar(
           elevation: 0,
@@ -60,6 +69,7 @@ class AuthController extends GetxController {
       await storage.storeUserData(loginResponse);
 
       Timer(Duration(seconds: 1), () {
+        Get.back();
         if (storage.token.val.isNotEmpty) {
           if (storage.userGroup.val == "admin") {
             Get.offAll(AdminDashboardPage());
@@ -116,10 +126,7 @@ class AuthController extends GetxController {
           ..showSnackBar(snackBar);
         return;
       }
-
-      Timer(Duration(seconds: 1), () {
-        Get.offAll(LoginScreen());
-      });
+      Get.offAll(LoginScreen());
     } catch (error) {
       final snackBar = SnackBar(
         elevation: 0,

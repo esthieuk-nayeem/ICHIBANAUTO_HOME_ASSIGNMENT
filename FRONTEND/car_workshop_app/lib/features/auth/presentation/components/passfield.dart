@@ -28,6 +28,7 @@ class _PassFieldState extends State<PassField> {
 
   @override
   Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 400,
@@ -55,8 +56,8 @@ class _PassFieldState extends State<PassField> {
               ),
               contentPadding: const EdgeInsets.all(27),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: AppPallete.borderColor,
+                borderSide: BorderSide(
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -70,7 +71,7 @@ class _PassFieldState extends State<PassField> {
               ),
               hintText: widget.hintText,
               hintStyle:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w200),
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w200),
             ),
           )),
     );
