@@ -170,4 +170,33 @@ class BookingProvider {
       throw Exception('Error posting data !: $error');
     }
   }
+
+  Future<dynamic> getBookingCount() async {
+    try {
+      final token = storage.token.val;
+      print(token);
+
+      final headers = {
+        "Authorization": "token $token",
+        "Content-Type": "application/json"
+      };
+      final response = await http.get(Uri.parse(ApiPath.BASE_URL + "data/"),
+          headers: headers);
+
+      final responseData = jsonDecode(response.body);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      } else {
+        print('Failed to get data!!: ${response.statusCode}');
+        print(responseData);
+        return {"data": responseData, "status": response.statusCode};
+      }
+    } catch (error) {
+      print("Error: $error");
+      throw Exception('Error getting data !: $error');
+    }
+  }
 }

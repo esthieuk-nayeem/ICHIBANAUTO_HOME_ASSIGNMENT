@@ -15,9 +15,15 @@ class AdminDashboardPage extends StatefulWidget {
 }
 
 class _AdminDashboardPageState extends State<AdminDashboardPage> {
+  BookingController controller = Get.put(BookingController());
+  @override
+  void initState() {
+    super.initState();
+    controller.getBookingDataCount();
+  }
+
   @override
   Widget build(BuildContext context) {
-    BookingController controller = Get.put(BookingController());
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -91,32 +97,49 @@ class Header extends StatelessWidget {
 class StatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 12,
-      mainAxisSpacing: 12,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      childAspectRatio: 1.5, // Adjusted child aspect ratio
-      children: [
-        StatCard(
-            title: 'Win',
-            value: '0',
-            icon: Icons.emoji_events,
-            color: Colors.amber),
-        StatCard(
-            title: 'Lose', value: '0', icon: Icons.cancel, color: Colors.red),
-        StatCard(
-            title: 'Win rate',
-            value: '0',
-            icon: Icons.pie_chart,
-            color: Colors.blue),
-        StatCard(
-            title: 'All Trading',
-            value: '0',
-            icon: Icons.analytics,
-            color: Colors.orange),
-      ],
+    BookingController controller = Get.put(BookingController());
+    return Obx(
+      () => GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          childAspectRatio: 1.5, // Adjusted child aspect ratio
+          children: [
+            StatCard(
+              title: 'Total Bookings',
+              value: controller.bookingCount.value.totalBookings == null
+                  ? '0'
+                  : controller.bookingCount.value.totalBookings.toString(),
+              icon: Icons.event_available, // Represents scheduled bookings
+              color: Colors.amber,
+            ),
+            StatCard(
+              title: 'New Bookings',
+              value: controller.bookingCount.value.newBookings == null
+                  ? '0'
+                  : controller.bookingCount.value.newBookings.toString(),
+              icon: Icons.fiber_new, // Represents new bookings
+              color: Colors.red,
+            ),
+            StatCard(
+              title: 'Mechanics',
+              value: controller.bookingCount.value.allMechanics == null
+                  ? '0'
+                  : controller.bookingCount.value.allMechanics.toString(),
+              icon: Icons.build, // Represents mechanics or repair services
+              color: Colors.blue,
+            ),
+            StatCard(
+              title: 'Customers',
+              value: controller.bookingCount.value.allCustomers == null
+                  ? '0'
+                  : controller.bookingCount.value.allCustomers.toString(),
+              icon: Icons.group, // Represents people/customers
+              color: Colors.orange,
+            ),
+          ]),
     );
   }
 }

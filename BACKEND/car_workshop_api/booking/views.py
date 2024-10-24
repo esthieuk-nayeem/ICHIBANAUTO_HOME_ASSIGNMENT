@@ -65,6 +65,27 @@ class BookingAPIView(APIView):
 
 
 
+class BookingDataAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        try:
+            total_bookings =  Booking.objects.all().count()
+            new_bookings =  Booking.objects.filter(status="Requested").count()
+            all_mechanics =  User.objects.filter(groups__name="mechanic").count()
+            all_customers =  User.objects.filter(groups__name="user").count()
+            
+            data = {
+                "total_bookings":total_bookings,
+                "new_bookings":new_bookings,
+                "all_mechanics":all_mechanics,
+                "all_customers":all_customers,
+                
+            }        
+            return Response(data)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class SearchMechanic(APIView):

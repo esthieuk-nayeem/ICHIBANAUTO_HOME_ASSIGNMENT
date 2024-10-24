@@ -3,6 +3,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:car_workshop_app/core/common/widgets/loading_indicator.dart';
 import 'package:car_workshop_app/core/utils/services/local_storage_service.dart';
 import 'package:car_workshop_app/features/booking/data/booking_provider.dart';
+import 'package:car_workshop_app/features/booking/models/booking_count_model.dart';
 import 'package:car_workshop_app/features/booking/models/booking_data_model.dart';
 import 'package:car_workshop_app/features/booking/models/booking_post_model.dart';
 import 'package:car_workshop_app/features/booking/models/mechanic_data_model.dart';
@@ -19,6 +20,7 @@ class BookingController extends GetxController {
   final TextEditingController queryController = TextEditingController();
   RxList<BookingDataModel> allBookings = <BookingDataModel>[].obs;
   RxList<MechanicDataModel> filteredMechanics = <MechanicDataModel>[].obs;
+  Rx<BookingCountModel> bookingCount = BookingCountModel().obs;
 
   BookingPostModel bookingPostModel = BookingPostModel();
 
@@ -436,6 +438,62 @@ class BookingController extends GetxController {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(snackBar);
+      print('Error occurred during posting booking data: $error');
+    }
+  }
+
+  Future<void> getBookingDataCount() async {
+    // Show loading overlay
+    // Get.dialog(
+    //   const MinimalLoadingIndicator(),
+    //   barrierDismissible: false,
+    // );
+
+    try {
+      final response = await bookingProvider.getBookingCount();
+
+      // Hide loading overlay
+      // Get.back();
+
+      if (response['status'] != 200) {
+        final errorMessage = response['data'];
+        // final snackBar = SnackBar(
+        //   elevation: 0,
+        //   behavior: SnackBarBehavior.floating,
+        //   backgroundColor: Colors.transparent,
+        //   content: AwesomeSnackbarContent(
+        //     title: 'Updating Data Failed!',
+        //     message: '$errorMessage',
+        //     contentType: ContentType.failure,
+        //   ),
+        // );
+        // ScaffoldMessenger.of(Get.context!)
+        //   ..hideCurrentSnackBar()
+        //   ..showSnackBar(snackBar);
+        return;
+      } else {
+        final responseData = response['data'];
+        bookingCount.value = BookingCountModel.fromJson(responseData);
+
+        print("printing response data : $responseData");
+      }
+    } catch (error) {
+      // Hide loading overlay
+      // Get.back();
+
+      // final snackBar = SnackBar(
+      //   elevation: 0,
+      //   behavior: SnackBarBehavior.floating,
+      //   backgroundColor: Colors.transparent,
+      //   content: AwesomeSnackbarContent(
+      //     title: 'Posting Data Failed',
+      //     message: '$error!',
+      //     contentType: ContentType.failure,
+      //   ),
+      // );
+      // ScaffoldMessenger.of(Get.context!)
+      //   ..hideCurrentSnackBar()
+      //   ..showSnackBar(snackBar);
       print('Error occurred during posting booking data: $error');
     }
   }

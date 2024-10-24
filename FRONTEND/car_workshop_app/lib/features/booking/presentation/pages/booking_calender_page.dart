@@ -2,6 +2,7 @@ import 'package:car_workshop_app/core/utils/services/local_storage_service.dart'
 import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/bottom_nav_bar.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/admin_dashboard.dart';
+import 'package:car_workshop_app/features/booking/presentation/pages/booking_details_page.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/mechanic_dashboard.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/profile_page.dart';
 import 'package:car_workshop_app/features/booking/presentation/pages/user_dashboard.dart';
@@ -263,6 +264,34 @@ class _BookingCalendarScreenState extends State<BookingCalendarScreen> {
                     Text(
                         'Mechanic: ${booking.mechanic?.fullName ?? 'Not assigned'}'),
                     Text('Contact: ${booking.mechanic?.phone ?? 'N/A'}'),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Add your navigation or action logic here
+                        Get.to(BookingDetailsPage(
+                          index: index,
+                          bookingData: booking,
+                        ));
+                      },
+                      style: TextButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        minimumSize: Size(0, 0), // Makes the button small
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Reduces the button's tap area
+                      ),
+                      child: Text(
+                        'View Details',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors
+                              .blueAccent, // You can change the color to fit your design
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

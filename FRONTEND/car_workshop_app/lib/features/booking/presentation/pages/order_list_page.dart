@@ -28,14 +28,14 @@ class _BookingListPageState extends State<BookingListPage>
 
   final List<String> statuses = [
     'All',
-    'Canceled',
-    'Delivered',
-    'Pending Delivery',
+    'Requested',
+    'Pickup Requested',
     'Pending Pickup',
     'Pickup In Progress',
-    'Pickup Requested',
     'Repair In Progress',
-    'Requested'
+    'Pending Delivery',
+    'Delivered',
+    'Canceled'
   ];
 
   @override
