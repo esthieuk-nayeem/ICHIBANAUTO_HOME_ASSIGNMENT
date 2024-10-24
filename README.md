@@ -138,43 +138,41 @@ The backend is deployed on PythonAnywhere. The Android APK in the repository/ema
 - Access calendar view of bookings
 
 ## Screenshots
+### Screenshots
 
-### 1. Splash Screen
-![Splash Screen](./Screenshots/splashScreen.jpg)
+#### 1. Splash Screen
+![Splash Screen](./Screenshots/splashScreen.jpg){ width="100%" }
 
-### 2. Login Page
-![Login Page](./Screenshots/LoginPage.jpg)
+#### 2. Login Page
+![Login Page](./Screenshots/LoginPage.jpg){ width="100%" }
 
-### 3. Register Page
-![Register Page](./Screenshots/RegisterPage.jpg)
+#### 3. Register Page
+![Register Page](./Screenshots/RegisterPage.jpg){ width="100%" }
 
-### 4. User Dashboard
-![User Dashboard](./Screenshots/UserDashboardPage.jpg)
+#### 4. User Dashboard
+![User Dashboard](./Screenshots/UserDashboardPage.jpg){ width="100%" }
 
-### 5. Profile Page
-![Profile Page](./Screenshots/ProfilePage.jpg)
+#### 5. Profile Page
+![Profile Page](./Screenshots/ProfilePage.jpg){ width="100%" }
 
-### 6. Booking Process
-#### Step 1: Booking Page 1
-![Booking Page 1](./Screenshots/BookingPage1.jpg)
+#### 6. Booking Process
+##### Step 1: Booking Page 1
+![Booking Page 1](./Screenshots/BookingPage1.jpg){ width="100%" }
 
-#### Step 2: Booking Page 2
-![Booking Page 2](./Screenshots/BookingPage2.jpg)
+##### Step 2: Booking Page 2
+![Booking Page 2](./Screenshots/BookingPage2.jpg){ width="100%" }
 
-#### Step 3: Booking Confirmation
-![Booking Confirmation Page](./Screenshots/BookingConfPage.jpg)
+##### Step 3: Booking Confirmation
+![Booking Confirmation Page](./Screenshots/BookingConfPage.jpg){ width="100%" }
 
+#### 7. Admin Dashboard
+![Admin Dashboard](./Screenshots/AdminDashboard.jpg){ width="100%" }
 
+#### 8. Calendar View for Bookings
+![Calendar UI](./Screenshots/CalendarUIPage.jpg){ width="100%" }
 
-### 7. Admin Dashboard
-![Admin Dashboard](./Screenshots/AdminDashboard.jpg)
-
-### 8. Calendar View for Bookings
-![Calendar UI](./Screenshots/CalendarUIPage.jpg)
-
-### 8. Booking List View for Bookings
-![Booking List UI](./Screenshots/BookingListPage.jpg)
-
+#### 9. Booking List View for Bookings
+![Booking List UI](./Screenshots/BookingListPage.jpg){ width="100%" }
 
 
 
