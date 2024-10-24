@@ -312,7 +312,7 @@ class _BookingTimeSlotPageState extends State<BookingTimeSlotPage> {
                             controller.bookingPostModel.pickupPoint =
                                 addressController.text.isNotEmpty
                                     ? addressController.text
-                                    : '';
+                                    : 'Not Selected';
                             controller.bookingPostModel.appointmentDate =
                                 DateFormat('yyyy-MM-dd').format(selectedDate);
                             controller.bookingPostModel.appointmentTime =

@@ -1,5 +1,7 @@
+import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:car_workshop_app/features/booking/presentation/components/quick_menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class QuickMenuSection extends StatefulWidget {
   @override
@@ -45,6 +47,7 @@ class _QuickMenuSectionState extends State<QuickMenuSection>
 
   @override
   Widget build(BuildContext context) {
+    BookingController controller = Get.put(BookingController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,18 +59,24 @@ class _QuickMenuSectionState extends State<QuickMenuSection>
         FadeTransition(
           opacity: _fadeAnimations[0],
           child: QuickMenuItem(
-            title: 'New Bookings',
+            title: 'View Bookings',
             icon: Icons.add_circle_outline,
-            onTap: () {},
+            onTap: () async {
+              controller.currentMenuIndex.value = 1;
+              await controller.getBookings(context, true);
+            },
           ),
         ),
         SizedBox(height: 15),
         FadeTransition(
           opacity: _fadeAnimations[1],
           child: QuickMenuItem(
-            title: 'All Customers',
-            icon: Icons.people_outline,
-            onTap: () {},
+            title: 'Calendar',
+            icon: Icons.calendar_month_outlined,
+            onTap: () async {
+              controller.currentMenuIndex.value = 2;
+              await controller.getBookings(context, true);
+            },
           ),
         ),
         SizedBox(height: 15),

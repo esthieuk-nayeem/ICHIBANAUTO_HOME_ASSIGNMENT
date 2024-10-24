@@ -1,4 +1,6 @@
+import 'package:car_workshop_app/features/booking/controllers/booking_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class BookingConfirmationPage extends StatefulWidget {
@@ -45,6 +47,7 @@ class _BookingConfirmationPageState extends State<BookingConfirmationPage>
 
   @override
   Widget build(BuildContext context) {
+    BookingController controller = Get.put(BookingController());
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -181,14 +184,10 @@ class _BookingConfirmationPageState extends State<BookingConfirmationPage>
                 child: Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // TODO: Implement view bookings
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Scaffold(), // Replace with your bookings page
-                          ),
-                        );
+                        controller.currentMenuIndex.value = 1;
+                        await controller.getBookings(context, true);
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 55),

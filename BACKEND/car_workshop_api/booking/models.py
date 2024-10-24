@@ -12,7 +12,7 @@ class Booking(models.Model):
     car_year = models.IntegerField()
     car_registration_plate = models.CharField(max_length=50)
     booking_description = models.CharField(max_length=255)
-    pickup_point = models.CharField(max_length=255)
+    pickup_point = models.CharField(max_length=255,null=True)
     appointment_date = models.DateField()
     appointment_time = models.CharField(max_length=50, choices=time_slots)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='booking_user')

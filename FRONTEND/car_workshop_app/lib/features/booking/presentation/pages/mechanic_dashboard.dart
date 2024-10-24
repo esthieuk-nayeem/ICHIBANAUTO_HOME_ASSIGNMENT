@@ -95,50 +95,16 @@ class _MechanicDashboardPageState extends State<MechanicDashboardPage> {
                   ),
                   SizedBox(height: 20),
 
-                  // Task Cards
-                  // GridView.count(
-                  //   shrinkWrap: true,
-                  //   physics: NeverScrollableScrollPhysics(),
-                  //   crossAxisCount: 2,
-                  //   mainAxisSpacing: 15,
-                  //   crossAxisSpacing: 15,
-                  //   childAspectRatio: 1.5,
-                  //   children: [
-                  //     _buildTaskCard(
-                  //       icon: Icons.build_circle,
-                  //       title: 'Ongoing Repairs',
-                  //       subtitle: '3 Pending',
-                  //       color: Colors.orange,
-                  //     ),
-                  //     _buildTaskCard(
-                  //       icon: Icons.check_circle_outline,
-                  //       title: 'Completed Repairs',
-                  //       subtitle: '12 Completed',
-                  //       color: Colors.green,
-                  //     ),
-                  //     _buildTaskCard(
-                  //       icon: Icons.schedule,
-                  //       title: 'Scheduled Jobs',
-                  //       subtitle: '2 Upcoming',
-                  //       color: Colors.blue,
-                  //     ),
-                  //     _buildTaskCard(
-                  //       icon: Icons.priority_high_outlined,
-                  //       title: 'Urgent Tasks',
-                  //       subtitle: '1 High Priority',
-                  //       color: Colors.red,
-                  //     ),
-                  //   ],
-                  // ),
-
                   SizedBox(height: 30),
 
                   // Tasks Button
                   Container(
                       width: double.infinity,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           // Navigation to task overview (e.g., to the second page or calendar page)
+                          controller.currentMenuIndex.value = 1;
+                          await controller.getBookings(context, true);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -168,7 +134,7 @@ class _MechanicDashboardPageState extends State<MechanicDashboardPage> {
                               SizedBox(width: 10),
                               Expanded(
                                 child: Text(
-                                  'View All Tasks in the 2nd page or in the calendar page',
+                                  'Click to View All Assigned Bookings!',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
