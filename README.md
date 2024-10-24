@@ -137,6 +137,11 @@ The backend is deployed on PythonAnywhere. The Android APK in the repository/ema
 - Track booking status
 - Access calendar view of bookings
 
+## Video Demonstration of the app : 
+
+URL :  https://drive.google.com/drive/folders/1DONHv4pWS3ePNVfvY6vg-9ILIhwfZTrT
+
+
 ## Screenshots
 
 Authentication Flow
