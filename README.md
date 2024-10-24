@@ -77,8 +77,8 @@ flutter run
 
 The backend is deployed on PythonAnywhere. The Android APK in the repository/email is configured to use the production URL.
 
-- Production API Swagger Documentation: `esthieuk.pythonanywhere.com/api/`
-- Admin Panel: `ieuk.pythonanywhere.com/admin/`
+- Production API Swagger Documentation: `https://esthieuk.pythonanywhere.com/api/`
+- Django Admin Panel: `https://esthieuk.pythonanywhere.com/admin/`
 
 
 -------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ The backend is deployed on PythonAnywhere. The Android APK in the repository/ema
 
 1. New users can register through the mobile app (creates a default user account)
 2. To modify user roles:
-   - Login to the admin panel at `esthieuk.pythonanywhere.com/admin/` using admin credentials
+   - Login to the admin panel at `https://esthieuk.pythonanywhere.com/admin/` using admin credentials
    - Navigate to Users section
    - Select the user you want to modify
    - In the user details, go to the "Groups" section
@@ -138,7 +138,45 @@ The backend is deployed on PythonAnywhere. The Android APK in the repository/ema
 - Access calendar view of bookings
 
 ## Screenshots
-[Add your app screenshots here]
+
+### 1. Splash Screen
+![Splash Screen](./Screenshots/splashScreen.jpg)
+
+### 2. Login Page
+![Login Page](./Screenshots/LoginPage.jpg)
+
+### 3. Register Page
+![Register Page](./Screenshots/RegisterPage.jpg)
+
+### 4. User Dashboard
+![User Dashboard](./Screenshots/UserDashboardPage.jpg)
+
+### 5. Profile Page
+![Profile Page](./Screenshots/ProfilePage.jpg)
+
+### 6. Booking Process
+#### Step 1: Booking Page 1
+![Booking Page 1](./Screenshots/BookingPage1.jpg)
+
+#### Step 2: Booking Page 2
+![Booking Page 2](./Screenshots/BookingPage2.jpg)
+
+#### Step 3: Booking Confirmation
+![Booking Confirmation Page](./Screenshots/BookingConfPage.jpg)
+
+
+
+### 7. Admin Dashboard
+![Admin Dashboard](./Screenshots/AdminDashboard.jpg)
+
+### 8. Calendar View for Bookings
+![Calendar UI](./Screenshots/CalendarUIPage.jpg)
+
+### 8. Booking List View for Bookings
+![Booking List UI](./Screenshots/BookingListPage.jpg)
+
+
+
 
 ## Support
 For any queries or support, please open an issue in the repository.
